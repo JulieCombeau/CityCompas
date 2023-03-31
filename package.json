@@ -1,5 +1,12 @@
 {
   "dependencies": {
     "pnpm": "^7.16.0"
+  },
+  "scripts": {
+    "integration-test": "docker compose -f docker-compose.integration-tests.yml up --build --exit-code-from testrunner",
+    "start": "docker compose -f docker-compose.yml up --build",
+    "start:prod": "docker compose -f docker-compose.production.yml pull && docker compose -f docker-compose.production.yml up --build",
+    "publish:server": "cd server && docker build -f Dockerfile.production . -t kaitolight/2209-wns-adleman-citycompass-server && docker push kaitolight/2209-wns-adleman-citycompass-server && cd ..",
+    "publish:client": "cd client && docker build -f Dockerfile.production -t kaitolight/2209-wns-adleman-citycompass-client . && docker push kaitolight/2209-wns-adleman-citycompass-client && cd .."
   }
 }
